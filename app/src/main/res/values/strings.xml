@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">mtkdem2-targel3</string>
+    <string name="loginstr">Login</string>
+    <string name="passwordstr">Password</string>
+    <string name="usernamestr">Username</string>
+    <string name="sign_instr">Sign in</string>
+    <string name="display_namestr">display name</string>
+    <string name="registerstr">Register</string>
+    <string name="sign_upstr">Sign Up</string>
+    <string name="confirm_passwordstr">confirm password</string>
 </resources>
