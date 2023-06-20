@@ -14,4 +14,6 @@ Call<MyProfile> getMyprofile(@Path("id") String id);
 
 @POST("Users")
     Call<MyProfile> createUser(@Body MyProfile myProfile);
+@POST("Tokens")
+Call<Token> getlogin(@Body forlogin forlogin);
 }

@@ -39,5 +39,25 @@ public class ProfileAPI {
             }
         });
     }
+    public void gologin(forlogin forlogin,RegistrationCallback callback){
+        Call<Token> call = webServiceAPI.getlogin(forlogin);
+        call.enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                if (response.isSuccessful()) {
+                     Token token = response.body();
+                    callback.onRegistrationSuccess();
+                } else {
+                    int statusCode = response.code();
+                    callback.onRegistrationFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                callback.onRegistrationFailure();
+            }
+        });
+    }
 
 }

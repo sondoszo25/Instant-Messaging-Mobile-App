@@ -30,6 +30,7 @@
 
 
         <EditText
+            android:id="@+id/usernameloginid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -40,6 +41,7 @@
             tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
+            android:id="@+id/passwordloingid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -50,6 +52,7 @@
             tools:ignore="VisualLintTextFieldSize" />
 
        <Button
+           android:id="@+id/loginbuttonid"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="10sp"

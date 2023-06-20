@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,13 +16,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class RegisterActivity extends AppCompatActivity {
     private final int GRC=1000;
     private MyProfile myProfile;
+    private String base64Image;
+
     private String password;
     private String username;
     private String displayName;
-    private String profilePic="test";
+    private String profilePic="data:image/*;base64,";
     private String confirmpassword;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +90,14 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onRegistrationSuccess() {
                         builder.setMessage("Registration successful!");
-
                         // Set the OK button
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         });
 
@@ -101,7 +109,6 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onRegistrationFailure() {
                         builder.setMessage("Registration failed.");
-
                         // Set the OK button
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -115,6 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
+
             }
         });
 
@@ -129,9 +137,21 @@ public class RegisterActivity extends AppCompatActivity {
             if (data != null) {
                 Uri selectedImageUri = data.getData();
                 ImageView imageView = findViewById(R.id.photoview);
-                profilePic=selectedImageUri.toString();
+                profilePic = selectedImageUri.toString();
                 imageView.setImageURI(selectedImageUri);
+
+                // Convert the selected image to Base64
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
+                    byte[] imageBytes = new byte[inputStream.available()];
+                    inputStream.read(imageBytes);
+                    inputStream.close();
+                    profilePic = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
+
 }
