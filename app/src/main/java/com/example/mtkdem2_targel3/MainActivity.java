@@ -40,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                            Token token=profileAPI.getToken();
+                            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                            intent.putExtra("token", token.getToken());
+                            intent.putExtra("username", username);
                             startActivity(intent);
                             finish();
                         }

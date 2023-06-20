@@ -9,7 +9,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileAPI {
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
- private int flag=0;
+    private Token token;
+    private MyProfile myProfile;
+
+    public Token getToken() {
+        return token;
+    }
+
+    public MyProfile getMyProfile() {
+        return myProfile;
+    }
+
+    private int flag=0;
     public ProfileAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApp.context.getString(R.string.BaseUrl))
@@ -45,7 +56,7 @@ public class ProfileAPI {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 if (response.isSuccessful()) {
-                     Token token = response.body();
+                      token = response.body();
                     callback.onRegistrationSuccess();
                 } else {
                     int statusCode = response.code();
@@ -60,4 +71,21 @@ public class ProfileAPI {
         });
     }
 
+    public MyProfile getuser(String token,String username){
+        Call<MyProfile> call = webServiceAPI.getMyprofile(token, username);
+        call.enqueue(new Callback<MyProfile>(){
+            @Override
+            public void onResponse(Call<MyProfile> call, Response<MyProfile> response) {
+                if (response.isSuccessful()) {
+                    myProfile = response.body();
+                } else {
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<MyProfile> call, Throwable t) {
+            }
+        });
+        return myProfile;
+    }
 }
