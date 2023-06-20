@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String username;
     private String displayName;
     private String profilePic="test";
+    private String confirmpassword;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -51,6 +52,26 @@ public class RegisterActivity extends AppCompatActivity {
                 username = ussernameEditText.getText().toString();
                 EditText displaynameEditText = findViewById(R.id.displayname);
                 displayName = displaynameEditText.getText().toString();
+                EditText confrimEditText = findViewById(R.id.Passwordconfirmid);
+                confirmpassword = confrimEditText.getText().toString();
+                if (!password.equals(confirmpassword)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("Password Mismatch");
+                    builder.setMessage("The password and confirm password do not match.");
+
+                    // Set the OK button
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Create and show the alert dialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    return; // Return without continuing further
+                }
                 myProfile = new MyProfile(username, password, displayName, profilePic);
 
                 // Create an alert dialog builder
