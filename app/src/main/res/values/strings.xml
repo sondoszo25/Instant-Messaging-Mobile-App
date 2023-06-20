@@ -8,4 +8,5 @@
     <string name="registerstr">Register</string>
     <string name="sign_upstr">Sign Up</string>
     <string name="confirm_passwordstr">confirm password</string>
+    <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
 </resources>

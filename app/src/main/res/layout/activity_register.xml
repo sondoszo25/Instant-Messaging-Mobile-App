@@ -32,6 +32,7 @@
 
 
         <EditText
+            android:id="@+id/userid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -42,6 +43,7 @@
             tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
+            android:id="@+id/Passwordid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -62,6 +64,7 @@
             tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
+            android:id="@+id/displayname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -81,11 +84,14 @@
         tools:layout_editor_absoluteX="-16dp">
 
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:id="@+id/photoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="photo"
             />
 
         <Button
+            android:id="@+id/photobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -95,6 +101,7 @@
     </LinearLayout>
 
         <Button
+            android:id="@+id/Registerbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
