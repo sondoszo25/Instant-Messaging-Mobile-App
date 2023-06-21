@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +42,5 @@ public class ChatActivity extends AppCompatActivity {
            public void onError(Throwable t) {
            }
        });
-       Button buttonexit=findViewById(R.id.btnlogout);
-
     }
 }
