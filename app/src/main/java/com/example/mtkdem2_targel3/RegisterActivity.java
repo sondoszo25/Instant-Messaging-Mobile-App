@@ -138,15 +138,13 @@ public class RegisterActivity extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 ImageView imageView = findViewById(R.id.photoview);
                 profilePic = selectedImageUri.toString();
-                imageView.setImageURI(selectedImageUri);
-
-                // Convert the selected image to Base64
+                //imageView.setImageURI(selectedImageUri);
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                     byte[] imageBytes = new byte[inputStream.available()];
                     inputStream.read(imageBytes);
                     inputStream.close();
-                    profilePic = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    profilePic = "data:image/*;base64,"+ Base64.encodeToString(imageBytes, Base64.DEFAULT);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

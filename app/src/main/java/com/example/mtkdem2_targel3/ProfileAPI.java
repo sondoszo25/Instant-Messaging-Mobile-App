@@ -11,6 +11,11 @@ public class ProfileAPI {
     WebServiceAPI webServiceAPI;
     private Token token;
     private MyProfile myProfile;
+    private String tokentest;
+
+    public String getTokentest() {
+        return tokentest;
+    }
 
     public Token getToken() {
         return token;
@@ -30,62 +35,66 @@ public class ProfileAPI {
     }
 
     public void postUsername(MyProfile myProfile, RegistrationCallback callback) {
-        Call<MyProfile> call = webServiceAPI.createUser(myProfile);
-        call.enqueue(new Callback<MyProfile>() {
+        Call<Void> call = webServiceAPI.createUser(myProfile);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<MyProfile> call, Response<MyProfile> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    MyProfile myProfile = response.body();
                     callback.onRegistrationSuccess();
                 } else {
                     int statusCode = response.code();
                     callback.onRegistrationFailure();
                 }
             }
-
             @Override
-            public void onFailure(Call<MyProfile> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 System.out.println("Request failed: " + t.getMessage());
                 callback.onRegistrationFailure();
             }
         });
     }
-    public void gologin(forlogin forlogin,RegistrationCallback callback){
-        Call<Token> call = webServiceAPI.getlogin(forlogin);
+    public void gologin(forlogin forLogin, RegistrationCallback callback) {
+        Call<Token> call = webServiceAPI.getlogin(forLogin);
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 if (response.isSuccessful()) {
-                      token = response.body();
+                    token=response.body();
                     callback.onRegistrationSuccess();
-                } else {
-                    int statusCode = response.code();
-                    callback.onRegistrationFailure();
                 }
+                    else {
+                        callback.onRegistrationFailure();
+                    }
             }
-
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
+                // Handle failure case (e.g., network error)
                 callback.onRegistrationFailure();
             }
         });
     }
 
-    public MyProfile getuser(String token,String username){
-        Call<MyProfile> call = webServiceAPI.getMyprofile(token, username);
-        call.enqueue(new Callback<MyProfile>(){
+
+    public void getuser(Token token, String username, final MyProfileCallback callback) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<MyProfile> call = webServiceAPI.getMyprofile(authorizationHeader, username);
+        call.enqueue(new Callback<MyProfile>() {
             @Override
             public void onResponse(Call<MyProfile> call, Response<MyProfile> response) {
                 if (response.isSuccessful()) {
-                    myProfile = response.body();
+                     myProfile = response.body();
+                    callback.onSuccess(myProfile);
                 } else {
                     int statusCode = response.code();
+                    callback.onFailure(statusCode);
                 }
             }
+
             @Override
             public void onFailure(Call<MyProfile> call, Throwable t) {
+                callback.onError(t);
             }
         });
-        return myProfile;
     }
+
 }

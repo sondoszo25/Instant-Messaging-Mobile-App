@@ -10,11 +10,11 @@ import retrofit2.http.Path;
 
 public interface WebServiceAPI
 {
-@GET("Users/{username}")
-Call<MyProfile> getMyprofile(@Header("Authorization") String token, @Path("username") String username);
+@GET("Users/{id}")
+Call<MyProfile> getMyprofile(@Header("Authorization") String token, @Path("id") String id);
 
 @POST("Users")
-    Call<MyProfile> createUser(@Body MyProfile myProfile);
+    Call<Void> createUser(@Body MyProfile myProfile);
 @POST("Tokens")
 Call<Token> getlogin(@Body forlogin forlogin);
 }
