@@ -1,5 +1,6 @@
 package com.example.mtkdem2_targel3;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -42,5 +45,28 @@ public class ChatActivity extends AppCompatActivity {
            public void onError(Throwable t) {
            }
        });
+        FloatingActionButton btnexit=findViewById(R.id.btnlogout);
+        btnexit.setOnClickListener(view ->{
+            Intent i=new Intent(this,MainActivity.class);
+            startActivity(i);
+        });
+
+        FloatingActionButton btnadd=findViewById(R.id.btnAdd);
+        btnadd.setOnClickListener(view ->{
+            Intent intent = new Intent(this, addActivity.class);
+            intent.putExtra("token", token.getToken());
+            intent.putExtra("username", username);
+            startActivity(intent);
+        });
+
+
+        FloatingActionButton deleteadd=findViewById(R.id.btndelete);
+        deleteadd.setOnClickListener(view ->{
+            Intent intent = new Intent(this, addActivity.class);
+            intent.putExtra("token", token.getToken());
+            intent.putExtra("username", username);
+            startActivity(intent);
+        });
+
     }
 }

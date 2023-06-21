@@ -9,7 +9,7 @@
     <string name="sign_upstr">Sign Up</string>
     <string name="confirm_passwordstr">confirm password</string>
     <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
-    <string name="addbtn" >add </string>
+    <string name="addbtn">add </string>
     <string name="deletebtn">delete</string>
     <string name="profile">profile</string>
     <string name="logoutbtn">logout</string>
