@@ -62,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
 
         FloatingActionButton deleteadd=findViewById(R.id.btndelete);
         deleteadd.setOnClickListener(view ->{
-            Intent intent = new Intent(this, addActivity.class);
+            Intent intent = new Intent(this, deleteActivity.class);
             intent.putExtra("token", token.getToken());
             intent.putExtra("username", username);
             startActivity(intent);
