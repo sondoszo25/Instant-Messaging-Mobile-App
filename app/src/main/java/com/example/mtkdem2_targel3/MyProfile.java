@@ -8,6 +8,7 @@ public class MyProfile {
     @PrimaryKey(autoGenerate=true)
     private int id;
     private String username;
+
     private String password;
     private String displayName;
     private String profilePic;

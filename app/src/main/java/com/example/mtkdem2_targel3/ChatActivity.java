@@ -9,18 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.apache.http.params.CoreConnectionPNames;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChatActivity extends AppCompatActivity {
-
+    private ContactsViewModel contactsViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,38 +70,15 @@ public class ChatActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             startActivity(intent);
         });
-
+        contactsViewModel=new ViewModelProvider(this).get(ContactsViewModel.class);
+        contactsViewModel.setToken(token);
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
         final ContactsListAdapter adapter = new ContactsListAdapter(this);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager((this)));
-        List<Contacts> contacts = new ArrayList<>();
-        MyProfile myProfile=new MyProfile("sonis1","aa","sonis1",null);
-        Message message=new Message(1,"13.4",new Sender("moom"),"hi sonis");
-        MyProfile myProfile2=new MyProfile("sonis12","aa","sonis12",null);
-        Message message2=new Message(1,"13.4",new Sender("moom"),"hi sonis");
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        contacts.add(new Contacts(2,myProfile,message));
-        contacts.add(new Contacts(2,myProfile2,null));
-        adapter.setContacts(contacts);
+        contactsViewModel.get().observe(this,contacts -> {
+            adapter.setContacts(contacts);
+        });
+
     }
 }

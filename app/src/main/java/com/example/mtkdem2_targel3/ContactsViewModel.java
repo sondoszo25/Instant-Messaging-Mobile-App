@@ -7,16 +7,20 @@ import java.util.List;
 
 public class ContactsViewModel extends ViewModel {
 
-    //private ContactsRepository contactsRepository;
+    private ContactsRepository contactsRepository;
     private LiveData<List<Contacts>> contacts;
+    private Token token;
+    public ContactsViewModel() {
+    }
 
-   /* public ContactsViewModel(ContactsRepository contactsRepository, LiveData<List<Contacts>> contacts) {
-        contactsRepository = new ContactsRepository();
+    public void setToken(Token token) {
+        this.token = token;
+        contactsRepository = new ContactsRepository(token);
         contacts = contactsRepository.getAll();
-    }*/
+    }
 
-   public LiveData<List<Contacts>> get(){ return contacts;}
-/*
+    public LiveData<List<Contacts>> get(){ return contacts;}
+
     public void add(Contacts contact){
         contactsRepository.add(contact);
     }
@@ -24,8 +28,9 @@ public class ContactsViewModel extends ViewModel {
     public void delete(Contacts contact){
         contactsRepository.delete(contact);
     }
-
+/*
     public void reload(){
         contactsRepository.reload();
-    }*/
+    }
+   */
 }

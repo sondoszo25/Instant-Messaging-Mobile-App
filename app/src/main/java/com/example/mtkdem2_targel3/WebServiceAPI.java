@@ -1,6 +1,8 @@
 package com.example.mtkdem2_targel3;
 
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,4 +19,9 @@ Call<MyProfile> getMyprofile(@Header("Authorization") String token, @Path("id") 
     Call<Void> createUser(@Body MyProfile myProfile);
 @POST("Tokens")
 Call<Token> getlogin(@Body forlogin forlogin);
+
+@GET("Chats")
+    Call<List<Contacts>> getContacts(@Header("Authorization") String authorizationHeader);
 }
+
+

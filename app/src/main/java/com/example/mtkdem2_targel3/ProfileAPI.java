@@ -1,5 +1,9 @@
 package com.example.mtkdem2_targel3;
 
+import androidx.lifecycle.MutableLiveData;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +25,10 @@ public class ProfileAPI {
         return token;
     }
 
+
+
+
+
     public MyProfile getMyProfile() {
         return myProfile;
     }
@@ -33,7 +41,14 @@ public class ProfileAPI {
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
-
+    public ProfileAPI(Token token) {
+        this.token=token;
+        retrofit = new Retrofit.Builder()
+                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        webServiceAPI = retrofit.create(WebServiceAPI.class);
+    }
     public void postUsername(MyProfile myProfile, RegistrationCallback callback) {
         Call<Void> call = webServiceAPI.createUser(myProfile);
         call.enqueue(new Callback<Void>() {
@@ -97,4 +112,39 @@ public class ProfileAPI {
         });
     }
 
+    public void delete(Contacts contact) {
+        
+    }
+
+    public void addcontact(Contacts contact) {
+        
+    }
+
+    public void getcontacts(MutableLiveData<List<Contacts>> contactListData) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<List<Contacts>> call = webServiceAPI.getContacts(authorizationHeader);
+
+
+        call.enqueue(new Callback<List<Contacts>>() {
+            @Override
+            public void onResponse(Call<List<Contacts>> call, Response<List<Contacts>> response) {
+                if (response.isSuccessful()) {
+                 contactListData.setValue(response.body());
+                } else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Contacts>> call, Throwable t) {
+            }
+        });
+
+
+
+
+
+
+
+    }
 }
