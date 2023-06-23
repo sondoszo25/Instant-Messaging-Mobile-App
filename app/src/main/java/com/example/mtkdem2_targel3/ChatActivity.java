@@ -53,7 +53,10 @@ public class ChatActivity extends AppCompatActivity {
             Intent i=new Intent(this,MainActivity.class);
             startActivity(i);
         });
-
+        contactsViewModel=new ViewModelProvider(this).get(ContactsViewModel.class);
+        contactsViewModel.setToken(token);
+        ContactsViewModelSingleton contactsViewModelSingleton=ContactsViewModelSingleton.getInstance();
+        contactsViewModelSingleton.setContactsViewModel(contactsViewModel);
         FloatingActionButton btnadd=findViewById(R.id.btnAdd);
         btnadd.setOnClickListener(view ->{
             Intent intent = new Intent(this, addActivity.class);
@@ -62,7 +65,6 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         FloatingActionButton deleteadd=findViewById(R.id.btndelete);
         deleteadd.setOnClickListener(view ->{
             Intent intent = new Intent(this, deleteActivity.class);
@@ -70,8 +72,7 @@ public class ChatActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             startActivity(intent);
         });
-        contactsViewModel=new ViewModelProvider(this).get(ContactsViewModel.class);
-        contactsViewModel.setToken(token);
+
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
         final ContactsListAdapter adapter = new ContactsListAdapter(this);
         lstContacts.setAdapter(adapter);

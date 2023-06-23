@@ -8,6 +8,7 @@ import java.util.List;
 public class ContactsViewModel extends ViewModel {
 
     private ContactsRepository contactsRepository;
+
     private LiveData<List<Contacts>> contacts;
     private Token token;
     public ContactsViewModel() {
@@ -21,12 +22,12 @@ public class ContactsViewModel extends ViewModel {
 
     public LiveData<List<Contacts>> get(){ return contacts;}
 
-    public void add(Contacts contact){
-        contactsRepository.add(contact);
+    public void add(Sender addcontact){
+        contactsRepository.add(addcontact);
     }
 
-    public void delete(Contacts contact){
-        contactsRepository.delete(contact);
+    public void delete(int id){
+        contactsRepository.delete(id);
     }
 /*
     public void reload(){

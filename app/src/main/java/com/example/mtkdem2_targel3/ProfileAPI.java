@@ -112,12 +112,26 @@ public class ProfileAPI {
         });
     }
 
-    public void delete(Contacts contact) {
-        
-    }
 
-    public void addcontact(Contacts contact) {
-        
+
+    public void addcontact(Sender addcontact) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<foraddchat> call = webServiceAPI.AddContacts(authorizationHeader,addcontact);
+        call.enqueue(new Callback<foraddchat>() {
+            @Override
+            public void onResponse(Call<foraddchat> call, Response<foraddchat> response) {
+                if (response.isSuccessful()) {
+
+                } else {
+
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<foraddchat> call, Throwable t) {
+            }
+        });
     }
 
     public void getcontacts(MutableLiveData<List<Contacts>> contactListData) {
@@ -139,12 +153,42 @@ public class ProfileAPI {
             public void onFailure(Call<List<Contacts>> call, Throwable t) {
             }
         });
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+    public void deletecontact(int id) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<Void> call = webServiceAPI.DeleteContacts(authorizationHeader,id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+
+                } else {
+
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

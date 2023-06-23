@@ -5,6 +5,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,6 +23,13 @@ Call<Token> getlogin(@Body forlogin forlogin);
 
 @GET("Chats")
     Call<List<Contacts>> getContacts(@Header("Authorization") String authorizationHeader);
+
+
+    @POST("Chats")
+    Call<foraddchat> AddContacts(@Header("Authorization") String authorizationHeader,@Body Sender sender);
+
+    @DELETE("Chats/{id}")
+    Call<Void> DeleteContacts(@Header("Authorization") String authorizationHeader,@Path("id")int id);
 }
 
 

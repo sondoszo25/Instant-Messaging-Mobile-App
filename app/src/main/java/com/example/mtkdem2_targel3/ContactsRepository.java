@@ -24,17 +24,15 @@ public class ContactsRepository {
     }
 
     private Token token;
-    public void add(Contacts contact) {
-        profileAPI.addcontact(contact);
-        profileAPI.getcontacts(contactListData);
+    public void add(Sender addcontact) {
+        profileAPI.addcontact(addcontact);
     }
 
 
 
 
-    public void delete(Contacts contact) {
-        profileAPI.delete(contact);
-        profileAPI.getcontacts(contactListData);
+    public void delete(int id) {
+        profileAPI.deletecontact(id);
     }
 
     class ContactListData extends MutableLiveData<List<Contacts>>
