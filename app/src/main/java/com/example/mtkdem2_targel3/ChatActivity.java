@@ -1,5 +1,6 @@
 package com.example.mtkdem2_targel3;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -75,6 +76,25 @@ public class ChatActivity extends AppCompatActivity {
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
         final ContactsListAdapter adapter = new ContactsListAdapter(this);
+        adapter.setOnItemClickListener(new ContactsListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Contacts clickedContact = adapter.getContacts().get(position);
+
+                // Create an intent to navigate to the new activity
+                Intent intent = new Intent(ChatActivity.this, MsgsActivity.class);
+                // Pass any necessary data to the new activity
+                intent.putExtra("token", token.getToken());
+                intent.putExtra("username", username);
+                FriendProfile friendProfile=FriendProfile.getInstance();
+                friendProfile.setId(clickedContact.getId());
+                friendProfile.setPic(clickedContact.getUser().getProfilePic());
+                friendProfile.setUsername(clickedContact.getUser().getDisplayName());
+
+                // Start the new activity2
+                startActivity(intent);
+            }
+        });
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager((this)));
         contactsViewModel.get().observe(this,contacts -> {

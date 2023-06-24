@@ -16,11 +16,25 @@ import java.util.List;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ContactViewHolder> {
 
+    private OnItemClickListener onItemClickListener;
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+
+
     class ContactViewHolder extends RecyclerView.ViewHolder{
         private final TextView tvName;
         private final TextView tvLastmsg;
         private final TextView tvTime;
         private final ImageView ivPic;
+
+
 
         private ContactViewHolder(View itemView) {
             super(itemView);
@@ -28,6 +42,15 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             tvTime = itemView.findViewById(R.id.tvTime);
             tvName = itemView.findViewById(R.id.tvName);
             ivPic = itemView.findViewById(R.id.ivPic);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClick(getAdapterPosition());
+                    }
+                }
+            });
+
         }
     }
     private final LayoutInflater mInflater;
