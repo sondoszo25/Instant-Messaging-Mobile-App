@@ -1,6 +1,9 @@
 package com.example.mtkdem2_targel3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MsgsActivity extends AppCompatActivity {
+    private MessageViewModel messageViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,17 @@ public class MsgsActivity extends AppCompatActivity {
             i.putExtra("token", token);
             i.putExtra("username", username);
             startActivity(i);
+        });
+        messageViewModel=new ViewModelProvider(this).get(MessageViewModel.class);
+        messageViewModel.setTokenandid(new Token(token),id);
+
+        RecyclerView lstMessages = findViewById(R.id.lstMsg);
+        MessageListAdapter messageListAdapter = new MessageListAdapter(this);
+        messageListAdapter.setMe(username);
+        lstMessages.setAdapter(messageListAdapter);
+        lstMessages.setLayoutManager(new LinearLayoutManager((this)));
+        messageViewModel.get().observe(this,messages -> {
+            messageListAdapter.setMessages(messages);
         });
     }
 }

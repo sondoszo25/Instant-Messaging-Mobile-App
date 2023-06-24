@@ -26,7 +26,7 @@ public class ChatActivity extends AppCompatActivity {
         String username=getIntent().getStringExtra("username");
         ProfileAPI profileAPI = new ProfileAPI();
         TextView mename=findViewById(R.id.mename);
-            ImageView imgview=findViewById(R.id.mepic);
+        ImageView imgview=findViewById(R.id.mepic);
            profileAPI.getuser(token, username, new MyProfileCallback() {
                @Override
                public void onSuccess(MyProfile myProfile) {
@@ -100,6 +100,8 @@ public class ChatActivity extends AppCompatActivity {
         contactsViewModel.get().observe(this,contacts -> {
             adapter.setContacts(contacts);
         });
+
+
 
     }
 }

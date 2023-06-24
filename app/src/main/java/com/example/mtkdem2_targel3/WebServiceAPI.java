@@ -30,6 +30,9 @@ Call<Token> getlogin(@Body forlogin forlogin);
 
     @DELETE("Chats/{id}")
     Call<Void> DeleteContacts(@Header("Authorization") String authorizationHeader,@Path("id")int id);
+
+    @GET("Chats/{id}/Messages")
+    Call<List<Message>> getMessages (@Header("Authorization") String authorizationHeader,@Path("id")int id);
 }
 
 

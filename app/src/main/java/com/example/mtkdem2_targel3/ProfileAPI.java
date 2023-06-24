@@ -183,7 +183,26 @@ public class ProfileAPI {
 
 
 
+    public void getMessages(MutableLiveData<List<Message>> messageListData,int id) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<List<Message>> call = webServiceAPI.getMessages(authorizationHeader,id);
 
+
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                if (response.isSuccessful()) {
+                    messageListData.setValue(response.body());
+                } else {
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+            }
+        });
+    }
 
 
 
