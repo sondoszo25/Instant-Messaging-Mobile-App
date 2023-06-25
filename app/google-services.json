@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "741058946127",
+    "project_id": "mtkdem2-targel3",
+    "storage_bucket": "mtkdem2-targel3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741058946127:android:3951899f609b81af34b63a",
+        "android_client_info": {
+          "package_name": "com.example.mtkdem2_targel3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741058946127-92j6r08pm26he0nru4fk1l8t992n4cij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvdtNFx4Lhz_lnE2BTvQoNOiOBtNRf_7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741058946127-92j6r08pm26he0nru4fk1l8t992n4cij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
