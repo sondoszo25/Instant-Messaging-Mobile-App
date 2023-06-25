@@ -1,16 +1,19 @@
 package com.example.mtkdem2_targel3;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -60,6 +63,20 @@ public class RegisterActivity extends AppCompatActivity {
                 displayName = displaynameEditText.getText().toString();
                 EditText confrimEditText = findViewById(R.id.Passwordconfirmid);
                 confirmpassword = confrimEditText.getText().toString();
+                String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+                if(!password.matches(pattern)) {
+                    if(password.length()<8) {
+                        Toast.makeText(RegisterActivity.this, "password should have at least 8 chars!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(RegisterActivity.this, "password should contain at least one uppercase,one lowercase,number", Toast.LENGTH_SHORT).show();
+                    }
+                    return;
+                }
+                if(TextUtils.isEmpty(username) || TextUtils.isEmpty(displayName) || TextUtils.isEmpty(password)){
+                    Toast.makeText(RegisterActivity.this, "all fields are required except profile photo", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (!password.equals(confirmpassword)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setTitle("Password Mismatch");

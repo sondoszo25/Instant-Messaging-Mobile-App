@@ -3,9 +3,11 @@ package com.example.mtkdem2_targel3;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
         });
-        Button loginbutton= findViewById(R.id.loginbuttonid);
+        Button loginbutton = findViewById(R.id.loginbuttonid);
         loginbutton.setOnClickListener(v -> {
             EditText passwordEditText = findViewById(R.id.passwordloingid);
             String password = passwordEditText.getText().toString();
             EditText ussernameEditText = findViewById(R.id.usernameloginid);
-           String username = ussernameEditText.getText().toString();
-           forlogin forlogin=new forlogin(username,password);
+            String username = ussernameEditText.getText().toString();
+            forlogin forlogin = new forlogin(username, password);
             ProfileAPI profileAPI = new ProfileAPI();
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Registration");
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            Token token=profileAPI.getToken();
+                            Token token = profileAPI.getToken();
                             Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                             intent.putExtra("token", token.getToken());
                             intent.putExtra("username", username);
@@ -70,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             });
         });
     }
-
-
 
 
 }
