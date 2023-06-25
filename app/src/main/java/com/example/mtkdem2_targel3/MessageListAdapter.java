@@ -46,7 +46,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                 holder.tvTimeR.setText(current.getCreated());
             } else {
                 holder.tvMsg.setText(current.getContent());
-                holder.cloudBackground.setBackgroundResource(R.drawable.imgcloud23);
                 holder.tvTime.setText(current.getCreated());
             }
         }
@@ -85,8 +84,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         private final TextView tvTime;
         private final TextView tvMsgR;
         private final TextView tvTimeR;
-        private final LinearLayout cloudBackground;
-        private final RelativeLayout allMsgIdLayout;
         private final String me;
 
         public MessageViewHolder(View itemView, String me) {
@@ -95,8 +92,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             tvTime = itemView.findViewById(R.id.tvTimeMsg);
             tvMsgR = itemView.findViewById(R.id.tvMsgMsgR);
             tvTimeR = itemView.findViewById(R.id.tvTimeMsgR);
-            allMsgIdLayout = itemView.findViewById(R.id.allmsgid);
-            cloudBackground= itemView.findViewById(R.id.cloudBackground);
             this.me = me;
         }
     }
