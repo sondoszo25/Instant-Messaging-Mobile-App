@@ -35,8 +35,8 @@ public class MessageRepository {
     }
 
     private Token token;
-    public void add() {
-
+    public void add(sendMsg msg) {
+        profileAPI.sendMessages(messageListData,id,msg);
     }
 
 
@@ -69,5 +69,6 @@ public class MessageRepository {
     public LiveData<List<Message>> getAll()
     {
         return this.messageListData;
+
     }
 }

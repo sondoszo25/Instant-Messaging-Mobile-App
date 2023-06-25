@@ -22,10 +22,8 @@ public class MessageViewModel extends ViewModel {
 
     public LiveData<List<Message>> get(){ return Messages;}
 
-    public void add(){
 
+    public void add(sendMsg msg){
+        messageRepository.add(msg);
     }
-
-
-
 }

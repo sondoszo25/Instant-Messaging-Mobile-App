@@ -1,6 +1,7 @@
 package com.example.mtkdem2_targel3;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageViewHolder> {
@@ -42,11 +47,44 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         if (messages != null) {
             final Message current = messages.get(position);
             if (current.getSender().getUsername().equals(holder.me)) {
-                holder.tvMsgR.setText(current.getContent());
-                holder.tvTimeR.setText(current.getCreated());
+
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                try {
+                    Date time = format.parse(current.getCreated());
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(time);
+
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                    int minute = calendar.get(Calendar.MINUTE);
+
+                    holder.tvMsgR.setText(current.getContent());
+                    holder.tvTimeR.setText(String.format("%02d:%02d", hour, minute));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
             } else {
-                holder.tvMsg.setText(current.getContent());
-                holder.tvTime.setText(current.getCreated());
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                try {
+                    Date time = format.parse(current.getCreated());
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(time);
+
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                    int minute = calendar.get(Calendar.MINUTE);
+
+                    holder.tvMsg.setText(current.getContent());
+                    holder.tvTime.setText(String.format("%02d:%02d", hour, minute));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }

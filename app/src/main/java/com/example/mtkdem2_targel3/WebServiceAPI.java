@@ -33,6 +33,6 @@ Call<Token> getlogin(@Body forlogin forlogin);
 
     @GET("Chats/{id}/Messages")
     Call<List<Message>> getMessages (@Header("Authorization") String authorizationHeader,@Path("id")int id);
+    @POST("Chats/{id}/Messages")
+    Call<Void> createMessage(@Header("Authorization") String authorizationHeader,@Path("id")int id,@Body sendMsg msg);
 }
-
-

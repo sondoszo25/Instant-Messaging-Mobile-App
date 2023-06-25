@@ -2,6 +2,7 @@ package com.example.mtkdem2_targel3;
 
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -143,7 +144,7 @@ public class ProfileAPI {
             @Override
             public void onResponse(Call<List<Contacts>> call, Response<List<Contacts>> response) {
                 if (response.isSuccessful()) {
-                 contactListData.setValue(response.body());
+                    contactListData.setValue(response.body());
                 } else {
                     int statusCode = response.code();
                 }
@@ -192,7 +193,9 @@ public class ProfileAPI {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.isSuccessful()) {
-                    messageListData.setValue(response.body());
+                    List<Message> messages = response.body();
+                    Collections.reverse(messages);
+                    messageListData.setValue(messages);
                 } else {
                     int statusCode = response.code();
                 }
@@ -205,7 +208,25 @@ public class ProfileAPI {
     }
 
 
+    public void sendMessages(MutableLiveData<List<Message>> messageListData,int id,sendMsg Msg) {
+        String authorizationHeader = "Bearer " + token.getToken();
+        Call<Void> call = webServiceAPI.createMessage(authorizationHeader,id,Msg);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                        getMessages(messageListData,id);
+                } else {
 
+                    int statusCode = response.code();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+    }
 
 
 

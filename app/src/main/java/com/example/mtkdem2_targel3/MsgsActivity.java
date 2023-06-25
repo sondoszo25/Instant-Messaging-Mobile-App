@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,9 +55,26 @@ public class MsgsActivity extends AppCompatActivity {
         MessageListAdapter messageListAdapter = new MessageListAdapter(this);
         messageListAdapter.setMe(username);
         lstMessages.setAdapter(messageListAdapter);
-        lstMessages.setLayoutManager(new LinearLayoutManager((this)));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        lstMessages.setLayoutManager(layoutManager);
         messageViewModel.get().observe(this,messages -> {
             messageListAdapter.setMessages(messages);
+            lstMessages.scrollToPosition(messageListAdapter.getItemCount() - 1);
+
         });
+
+        Button btnSend=findViewById(R.id.btnSend);
+        btnSend.setOnClickListener(view ->{
+            EditText msgEditText = findViewById(R.id.etMessage);
+           String msg = msgEditText.getText().toString();
+           msgEditText.setText("");
+           sendMsg sendMsg=new sendMsg(msg);
+           if(msg != null && !(msg.equals(""))) {
+               messageViewModel.add(sendMsg);
+               lstMessages.scrollToPosition(messageListAdapter.getItemCount() - 1);
+
+           }
+        });
+
     }
 }
