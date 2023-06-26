@@ -1,8 +1,11 @@
 package com.example.mtkdem2_targel3;
 
 import android.app.Activity;
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -40,6 +43,24 @@ public class RegisterActivity extends AppCompatActivity {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         });
+
+
+        UiModeManager uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isNightModeEnabled = nightMode == Configuration.UI_MODE_NIGHT_YES;
+
+        if (isNightModeEnabled) {
+
+            findViewById(R.id.mainidback1).setBackgroundResource(R.drawable.blackbackgound);
+        } else {
+            findViewById(R.id.mainidback1).setBackgroundResource(R.drawable.backimg);
+        }
+
+
+
+
+
         Button buttonRegister = findViewById(R.id.Registerbutton);
         Button btnUpload = findViewById(R.id.photobutton);
         ImageView getimg=findViewById(R.id.photoview);

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -42,7 +43,15 @@ public class MsgsActivity extends AppCompatActivity {
             Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
             imgview.setImageBitmap(decodedBitmap);
         }
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isNightModeEnabled = nightMode == Configuration.UI_MODE_NIGHT_YES;
 
+        if (isNightModeEnabled) {
+
+            findViewById(R.id.lstMsg).setBackgroundResource(R.drawable.blackbackgound);
+        } else {
+            findViewById(R.id.lstMsg).setBackgroundResource(R.drawable.backgroundchatapp);
+        }
 
 
 

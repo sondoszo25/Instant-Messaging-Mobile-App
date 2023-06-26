@@ -1,7 +1,10 @@
 package com.example.mtkdem2_targel3;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -26,6 +29,21 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
         });
+
+
+        UiModeManager uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isNightModeEnabled = nightMode == Configuration.UI_MODE_NIGHT_YES;
+
+        if (isNightModeEnabled) {
+
+            findViewById(R.id.mainidback).setBackgroundResource(R.drawable.blackbackgound);
+        } else {
+            findViewById(R.id.mainidback).setBackgroundResource(R.drawable.backimg);
+        }
+
+
         FloatingActionButton settingbutton=findViewById(R.id.settingsbtn);
         settingbutton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
