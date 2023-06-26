@@ -66,7 +66,15 @@
            android:id="@+id/registerlink"
            android:text="Not registered?Click here to register" />
    </LinearLayout>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settingsbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="76sp"
+        android:contentDescription="settings"
+        android:padding="10sp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

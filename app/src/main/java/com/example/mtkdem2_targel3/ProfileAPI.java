@@ -38,7 +38,7 @@ public class ProfileAPI {
     private int flag=0;
     public ProfileAPI() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(ServerSingelton.getInstance().getServer())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
@@ -46,7 +46,7 @@ public class ProfileAPI {
     public ProfileAPI(Token token) {
         this.token=token;
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(ServerSingelton.getInstance().getServer())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);

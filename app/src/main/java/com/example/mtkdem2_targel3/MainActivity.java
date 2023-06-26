@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
         });
+        FloatingActionButton settingbutton=findViewById(R.id.settingsbtn);
+        settingbutton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
+        });
+
         Button loginbutton = findViewById(R.id.loginbuttonid);
         loginbutton.setOnClickListener(v -> {
             EditText passwordEditText = findViewById(R.id.passwordloingid);
