@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,6 +42,12 @@ public class MsgsActivity extends AppCompatActivity {
             Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
             imgview.setImageBitmap(decodedBitmap);
         }
+
+
+
+
+
+
         FloatingActionButton backButton=findViewById(R.id.backbtn);
         backButton.setOnClickListener(view ->{
             Intent i = new Intent(this, ChatActivity.class);

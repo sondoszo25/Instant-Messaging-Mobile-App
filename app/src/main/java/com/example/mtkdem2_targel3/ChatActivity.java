@@ -21,6 +21,8 @@ public class ChatActivity extends AppCompatActivity {
     private ContactsViewModel contactsViewModel;
    private ContactsAppDB db;
    private ContactsDao contactsDao;
+    private MessageAppDB dbb;
+    private MessageDao MessageDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,13 @@ public class ChatActivity extends AppCompatActivity {
         ProfileAPI profileAPI = new ProfileAPI();
         TextView mename=findViewById(R.id.mename);
         ImageView imgview=findViewById(R.id.mepic);
+
+        dbb= Room.databaseBuilder(getApplicationContext(),MessageAppDB.class,"MessageDBDB").allowMainThreadQueries().build();
+        MessageDao=dbb.messageDao();
+        MessageRoomSingelton messageRoomSingelton=MessageRoomSingelton.getInstance();
+        messageRoomSingelton.setDb(dbb);
+        messageRoomSingelton.setContactsDao(MessageDao);
+
 
         db= Room.databaseBuilder(getApplicationContext(),ContactsAppDB.class,"ContactsDB").allowMainThreadQueries().build();
         contactsDao=db.contactsDao();

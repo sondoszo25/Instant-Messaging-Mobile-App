@@ -15,7 +15,7 @@ public class MessageRoomSingelton {
         return instance;
     }
 
-    public MessageDao getContactsDao() {
+    public MessageDao getMessageDao() {
         return messageDao;
     }
 

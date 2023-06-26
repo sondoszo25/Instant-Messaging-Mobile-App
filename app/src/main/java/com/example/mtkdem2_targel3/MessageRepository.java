@@ -28,7 +28,6 @@ public class MessageRepository {
         this.id=id;
         this.messageListData = new MessageRepository.MessageListData();
         profileAPI= new ProfileAPI(token);
-
     }
 
     public void setToken(Token token) {
