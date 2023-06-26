@@ -2,6 +2,7 @@ package com.example.mtkdem2_targel3;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.room.Room;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class MessageRepository {
     private MessageRepository.MessageListData messageListData;
     private ProfileAPI profileAPI;
     private int id;
+
 
     public int getId() {
         return id;

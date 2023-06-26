@@ -1,9 +1,11 @@
 package com.example.mtkdem2_targel3;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class Message {
+    @PrimaryKey
     private int id;
     private String created;
     private Sender sender;

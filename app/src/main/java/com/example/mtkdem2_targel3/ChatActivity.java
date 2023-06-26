@@ -13,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChatActivity extends AppCompatActivity {
     private ContactsViewModel contactsViewModel;
+   private ContactsAppDB db;
+   private ContactsDao contactsDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,13 @@ public class ChatActivity extends AppCompatActivity {
         ProfileAPI profileAPI = new ProfileAPI();
         TextView mename=findViewById(R.id.mename);
         ImageView imgview=findViewById(R.id.mepic);
-           profileAPI.getuser(token, username, new MyProfileCallback() {
+
+        db= Room.databaseBuilder(getApplicationContext(),ContactsAppDB.class,"ContactsDB").allowMainThreadQueries().build();
+        contactsDao=db.contactsDao();
+        ContactsRoomSingelton contactsRoomSingelton=ContactsRoomSingelton.getInstance();
+        contactsRoomSingelton.setDb(db);
+        contactsRoomSingelton.setContactsDao(contactsDao);
+        profileAPI.getuser(token, username, new MyProfileCallback() {
                @Override
                public void onSuccess(MyProfile myProfile) {
                    mename.setText(myProfile.getDisplayName());
@@ -100,7 +109,6 @@ public class ChatActivity extends AppCompatActivity {
         contactsViewModel.get().observe(this,contacts -> {
             adapter.setContacts(contacts);
         });
-
 
 
     }

@@ -115,14 +115,14 @@ public class ProfileAPI {
 
 
 
-    public void addcontact(Sender addcontact) {
+    public void addcontact(Sender addcontact,MutableLiveData<List<Contacts>> contactListData) {
         String authorizationHeader = "Bearer " + token.getToken();
         Call<foraddchat> call = webServiceAPI.AddContacts(authorizationHeader,addcontact);
         call.enqueue(new Callback<foraddchat>() {
             @Override
             public void onResponse(Call<foraddchat> call, Response<foraddchat> response) {
                 if (response.isSuccessful()) {
-
+                    getcontacts(contactListData);
                 } else {
 
                     int statusCode = response.code();
@@ -138,13 +138,14 @@ public class ProfileAPI {
     public void getcontacts(MutableLiveData<List<Contacts>> contactListData) {
         String authorizationHeader = "Bearer " + token.getToken();
         Call<List<Contacts>> call = webServiceAPI.getContacts(authorizationHeader);
-
-
         call.enqueue(new Callback<List<Contacts>>() {
             @Override
             public void onResponse(Call<List<Contacts>> call, Response<List<Contacts>> response) {
                 if (response.isSuccessful()) {
-                    contactListData.setValue(response.body());
+                   // contactListData.setValue(response.body());
+                    ContactsRoomSingelton.getInstance().getContactsDao().deleteAll();
+                    ContactsRoomSingelton.getInstance().getContactsDao().insert(response.body());
+                    contactListData.setValue(ContactsRoomSingelton.getInstance().getContactsDao().index());
                 } else {
                     int statusCode = response.code();
                 }
@@ -161,14 +162,14 @@ public class ProfileAPI {
 
 
 
-    public void deletecontact(int id) {
+    public void deletecontact(int id,MutableLiveData<List<Contacts>> contactListData) {
         String authorizationHeader = "Bearer " + token.getToken();
         Call<Void> call = webServiceAPI.DeleteContacts(authorizationHeader,id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
+                    getcontacts(contactListData);
                 } else {
 
                     int statusCode = response.code();

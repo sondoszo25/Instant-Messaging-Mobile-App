@@ -1,11 +1,16 @@
 package com.example.mtkdem2_targel3;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity
 public class Contacts {
+    @PrimaryKey
     private int id;
+
     private MyProfile user;
+
     private Message lastMessage;
 
     public Contacts(int id, MyProfile user, Message lastMessage) {

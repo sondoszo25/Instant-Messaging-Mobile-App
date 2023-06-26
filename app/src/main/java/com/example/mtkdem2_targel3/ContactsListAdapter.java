@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ContactViewHolder> {
@@ -76,7 +80,23 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             holder.tvName.setText(current.getUser().getDisplayName());
             if(current.getLastMessage() != null)
             {
-                holder.tvTime.setText(current.getLastMessage().getCreated());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+
+                try {
+                    Date time = format.parse(current.getLastMessage().getCreated());
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(time);
+
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                    int minute = calendar.get(Calendar.MINUTE);
+                    holder.tvTime.setText(String.format("%02d:%02d", hour, minute));
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 holder.tvLastmsg.setText(current.getLastMessage().getContent());
             }
             if(current.getUser().getProfilePic() == null || current.getUser().getProfilePic().equals("data:image/*;base64,"))
