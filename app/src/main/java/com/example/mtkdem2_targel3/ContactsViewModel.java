@@ -29,9 +29,9 @@ public class ContactsViewModel extends ViewModel {
     public void delete(int id){
         contactsRepository.delete(id);
     }
-/*
+
     public void reload(){
         contactsRepository.reload();
     }
-   */
+
 }

@@ -66,7 +66,7 @@ public class MsgsActivity extends AppCompatActivity {
         });
         messageViewModel=new ViewModelProvider(this).get(MessageViewModel.class);
         messageViewModel.setTokenandid(new Token(token),id);
-
+        messageviewsingleton.getInstance().setMessageViewModel(messageViewModel);
         RecyclerView lstMessages = findViewById(R.id.lstMsg);
         MessageListAdapter messageListAdapter = new MessageListAdapter(this);
         messageListAdapter.setMe(username);

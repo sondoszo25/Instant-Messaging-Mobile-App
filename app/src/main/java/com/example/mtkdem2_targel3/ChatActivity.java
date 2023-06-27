@@ -18,7 +18,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatActivity extends AppCompatActivity {
     private ContactsViewModel contactsViewModel;
@@ -132,6 +141,27 @@ public class ChatActivity extends AppCompatActivity {
             adapter.setContacts(contacts);
         });
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatActivity.this, instanceIdResult -> {
+             String newtoken=instanceIdResult.getToken();
+         Retrofit  retrofit = new Retrofit.Builder()
+                    .baseUrl(ServerSingelton.getInstance().getServer())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        WebServiceAPI   webServiceAPI = retrofit.create(WebServiceAPI.class);
+            Call<Void> call = webServiceAPI.sendtoken(new Token(newtoken));
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                    } else {
 
+                        int statusCode = response.code();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
+        });
     }
 }

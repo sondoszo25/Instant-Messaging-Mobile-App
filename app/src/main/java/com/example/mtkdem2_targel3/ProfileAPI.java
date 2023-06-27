@@ -227,8 +227,4 @@ public class ProfileAPI {
             }
         });
     }
-
-
-
-
 }

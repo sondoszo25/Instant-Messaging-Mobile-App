@@ -45,6 +45,10 @@ public class ContactsRepository {
         profileAPI.deletecontact(id,contactListData);
     }
 
+    public void reload() {
+        profileAPI.getcontacts(contactListData);
+    }
+
     class ContactListData extends MutableLiveData<List<Contacts>>
     {
         public ContactListData()

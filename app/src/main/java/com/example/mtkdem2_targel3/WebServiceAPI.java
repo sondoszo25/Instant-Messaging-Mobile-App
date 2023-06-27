@@ -35,4 +35,6 @@ Call<Token> getlogin(@Body forlogin forlogin);
     Call<List<Message>> getMessages (@Header("Authorization") String authorizationHeader,@Path("id")int id);
     @POST("Chats/{id}/Messages")
     Call<Void> createMessage(@Header("Authorization") String authorizationHeader,@Path("id")int id,@Body sendMsg msg);
+    @POST("firebase")
+    Call<Void>  sendtoken(@Body Token token);
 }

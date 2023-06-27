@@ -40,8 +40,10 @@ public class MessageRepository {
         profileAPI.sendMessages(messageListData,id,msg);
     }
 
+    public void reload() {
+        profileAPI.getMessages(messageListData,id);
 
-
+    }
 
 
     class MessageListData extends MutableLiveData<List<Message>>
