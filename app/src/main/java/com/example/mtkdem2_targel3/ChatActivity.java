@@ -42,6 +42,7 @@ public class ChatActivity extends AppCompatActivity {
         Token token = new Token( getIntent().getStringExtra("token"));
         String username=getIntent().getStringExtra("username");
         ProfileAPI profileAPI = new ProfileAPI();
+        usernamesingelton.getInstance().setUsername(username);
         TextView mename=findViewById(R.id.mename);
         ImageView imgview=findViewById(R.id.mepic);
 

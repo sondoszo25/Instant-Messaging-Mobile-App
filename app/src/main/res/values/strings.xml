@@ -13,4 +13,6 @@
     <string name="deletebtn">delete</string>
     <string name="profile">profile</string>
     <string name="logoutbtn">logout</string>
+    <string name="channel_name">Channel Msg</string>
+    <string name="channel_description">Msg</string>
 </resources>
