@@ -31,7 +31,9 @@ public class MyService extends FirebaseMessagingService {
         Map<String, String> data = remoteMessage.getData();
         String receiver = data.get("reciver");
         String sender = data.get("sender");
-        ContactsViewModelSingleton.getInstance().getContactsViewModel().reload();
+        if(ContactsViewModelSingleton.getInstance().getContactsViewModel() != null) {
+            ContactsViewModelSingleton.getInstance().getContactsViewModel().reload();
+        }
         if (messageviewsingleton.getInstance().getMessageViewModel() != null) {
             messageviewsingleton.getInstance().getMessageViewModel().reload();
         }
@@ -50,9 +52,7 @@ public class MyService extends FirebaseMessagingService {
 
             NotificationChannel channel = new NotificationChannel("2", "3", importance);
             channel.setDescription("Msg get");
-
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-
             notificationManager.createNotificationChannel(channel);
 
         }
@@ -64,20 +64,12 @@ public class MyService extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
                 .setContentTitle("Received Msg")
                 .setContentText("You received a message from " + sender)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setSmallIcon(R.drawable.ic_notifiction);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_NOTIFICATION_POLICY) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         notificationManager.notify(2, builder.build());
     }
-
 }
