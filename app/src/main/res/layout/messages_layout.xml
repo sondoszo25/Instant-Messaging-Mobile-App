@@ -18,12 +18,14 @@
         <!--The message text-->
         <TextView
             android:id="@+id/tvMsgMsg"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
         <!--the timestamp-->
         <TextView
             android:id="@+id/tvTimeMsg"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvMsgMsg"
