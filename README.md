@@ -16,5 +16,6 @@ to run the server we should run "ourServer" by the instructions in the readme of
 
 *note*: the firebase sometimes take alot of time to connect at the beggining, if it didnt connect/work please connect again to firebase, to do this
 you should connect to firebase first, to connect to the firebase we added the email ap2023.biu@gmail.com to the "mtkdem2-targel3-final" project.
-and make sure that the notifications are enabled in the device, if you want to recieve notifications.
+
+and make sure that the notifications are enabled in your device, if you want to recieve notifications.
 thanks ! :)
