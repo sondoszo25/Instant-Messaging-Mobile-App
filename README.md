@@ -55,8 +55,8 @@ Once you've added a friend, you can start chatting by selecting their name from 
 
 To run the app, you'll need to set up the server by following the instructions provided in the ourServer repository.
 # Steps to Start the Server:
-1. Clone the ourServer repository.
-2. Follow the instructions in the README of the ourServer repository to install dependencies and start the server.
+1. Clone the [ ourServer](https://github.com/sondoszo25/MessagingApp-ServerSide.git) repository.
+2. Follow the instructions in the README of the "MessagingApp-ServerSide" repository to install dependencies and start the server.
 3. Ensure that Firebase is correctly connected.
 
 
