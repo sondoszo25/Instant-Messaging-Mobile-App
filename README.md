@@ -63,7 +63,7 @@ To run the app, you'll need to set up the server by following the instructions p
 # Technologies Used
 This app leverages several modern technologies to provide a robust and scalable solution for real-time messaging:
 
-* React Native: Used for building the cross-platform mobile app (iOS & Android).
+* Android: Used for building the mobile app.
 * Node.js: Backend server running JavaScript for handling API requests and routing.
 * Express.js: Lightweight Node.js framework for building server-side logic.
 * MongoDB: NoSQL database used to store user credentials and chat data.
